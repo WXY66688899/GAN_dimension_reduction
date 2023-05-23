@@ -12,14 +12,18 @@ class CSNET_lite_3(nn.Module):
         self.fc2 = nn.Sequential(
             nn.Linear(measure_dim, measure_dim*2))
         self.fc3 = nn.Linear(measure_dim*2, image_dim)
+        self.fc4 = nn.Sequential(
+            nn.Linear(measure_dim, 1),
+            nn.Sigmoid()
+        )
 
     # forward method
     def forward(self, x):
         x = self.fc1(x)
+        y = self.fc4(x)
         x = self.fc2(x)
         x = self.fc3(x)
-        return x
-
+        return x, y
 
 class CSNET_lite_5(nn.Module):
     def __init__(self, image_dim, measure_dim):
@@ -47,7 +51,7 @@ class CSNET_lite_5(nn.Module):
 
 class CSNET_fc_3(nn.Module):
     def __init__(self, image_dim, measure_dim):
-        super(CSNET_fc, self).__init__()
+        super(CSNET_fc_3, self).__init__()
         self.fc1 = nn.Linear(image_dim, measure_dim)
         self.fc2 = nn.Sequential(
             nn.Linear(measure_dim, measure_dim*2),
@@ -76,6 +80,24 @@ class CSNET_sda(nn.Module):
         self.fc4 = nn.Sequential(
             nn.Linear(measure_dim, image_dim),
             nn.Sigmoid())
+    # forward method
+    def forward(self, x):
+        x = self.fc1(x)
+        x = self.fc2(x)
+        x = self.fc3(x)
+        x = self.fc4(x)
+        return x
+
+class CSNET_sda_lite(nn.Module):
+    def __init__(self, image_dim, measure_dim):
+        super(CSNET_sda_lite, self).__init__()
+        self.fc1 = nn.Linear(image_dim, measure_dim)
+        self.fc2 = nn.Sequential(
+            nn.Linear(measure_dim, image_dim))
+        self.fc3 = nn.Sequential(
+            nn.Linear(image_dim, measure_dim))
+        self.fc4 = nn.Sequential(
+            nn.Linear(measure_dim, image_dim))
     # forward method
     def forward(self, x):
         x = self.fc1(x)
