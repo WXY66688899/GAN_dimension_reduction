@@ -1,0 +1,2 @@
+# GAN_dimension_reduction
+这是基于降维思想的生成对抗网络图像生成的实现代码
