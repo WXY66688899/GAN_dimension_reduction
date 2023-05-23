@@ -418,55 +418,6 @@ class _Refiner(nn.Module):
 
         return output
 
-
-# class _RefinerD(nn.Module):
-#     def __init__(self, ngpu, nc, ndf):
-#         super(_RefinerD, self).__init__()
-#         self.ngpu = ngpu
-#         self.nc = nc
-#         self.ndf = ndf
-#         self.main = nn.Sequential(
-#             # input is (nc) x 512 x 512
-#             nn.Conv2d(self.nc, self.ndf, 4, 2, 1, bias=False),
-#             nn.LeakyReLU(0.2, inplace=True),
-#             # state size. (ndf) x 256 x 256
-#             nn.Conv2d(self.ndf, self.ndf, 4, 2, 1, bias=False),
-#             nn.BatchNorm2d(ndf),
-#             nn.LeakyReLU(0.2, inplace=True),
-#             # state size. (ndf) x 128 x 128
-#             nn.Conv2d(self.ndf, self.ndf, 4, 2, 1, bias=False),
-#             nn.BatchNorm2d(ndf),
-#             nn.LeakyReLU(0.2, inplace=True),
-#             # state size. (ndf) x 64 x 64
-#             nn.Conv2d(self.ndf, self.ndf, 4, 2, 1, bias=False),
-#             nn.BatchNorm2d(ndf),
-#             nn.LeakyReLU(0.2, inplace=True),
-#             # state size. (ndf) x 32 x 32
-#             nn.Conv2d(self.ndf, self.ndf * 2, 4, 2, 1, bias=False),
-#             nn.BatchNorm2d(ndf * 2),
-#             nn.LeakyReLU(0.2, inplace=True),
-#             # state size. (ndf*2) x 16 x 16
-#             nn.Conv2d(self.ndf * 2, self.ndf * 4, 4, 2, 1, bias=False),
-#             nn.BatchNorm2d(ndf * 4),
-#             nn.LeakyReLU(0.2, inplace=True),
-#             # state size. (ndf*4) x 8 x 8
-#             nn.Conv2d(self.ndf * 4, self.ndf * 8, 4, 2, 1, bias=False),
-#             nn.BatchNorm2d(ndf * 8),
-#             nn.LeakyReLU(0.2, inplace=True),
-#             # state size. (ndf*8) x 4 x 4
-#             nn.Conv2d(self.ndf * 8, 1, 1, 1, 0, bias=False),
-#             # state size. (1) x 4 x 4
-#             # nn.Sigmoid()
-#         )
-#         self.apply(weights_init)
-
-#     def forward(self, input):
-#         output = self.main(input)
-#         output = F.log_softmax(output)
-
-#         return output
-
-
 class _RefinerD(nn.Module):
     def __init__(self, nc, ndf):
         super(_RefinerD, self).__init__()
